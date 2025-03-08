@@ -5,12 +5,12 @@
 @layer base {
   :root {
     --background: theme('colors.white');
-    --foreground: theme('colors.gray.900');
+    --foreground: theme('colors.secondary.800');
   }
 
   [data-theme='night'] {
-    --background: theme('colors.gray.900');
-    --foreground: theme('colors.gray.50');
+    --background: theme('colors.secondary.900');
+    --foreground: theme('colors.secondary.100');
   }
 }
 
@@ -33,6 +33,39 @@
   }
 }
 
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .animate-fade-in {
   animation: fadeIn 0.8s ease-out forwards;
 }
@@ -47,6 +80,21 @@
   animation: fadeIn 0.8s ease-out 0.6s forwards;
 }
 
+.animate-slide-in-right {
+  opacity: 0;
+  animation: slideInRight 0.8s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  opacity: 0;
+  animation: slideInLeft 0.8s ease-out forwards;
+}
+
+.animate-scale-in {
+  opacity: 0;
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
 /* Custom utility classes */
 .text-shadow {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -58,9 +106,41 @@
 
 /* Hover effects */
 .hover-lift {
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .hover-lift:hover {
   transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Custom components */
+@layer components {
+  .container-custom {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-secondary-800 mb-3;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-secondary-600 max-w-3xl mx-auto mb-10;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center px-6 py-3 border border-secondary-300 text-base font-medium rounded-md shadow-sm text-secondary-700 bg-white hover:bg-secondary-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200;
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-soft overflow-hidden transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply hover:shadow-medium transform transition duration-300 hover:-translate-y-1;
+  }
 }
